@@ -1,0 +1,15 @@
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\bin\Debug\net6.0\StringAddCalculatorKata.exe
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\bin\Debug\net6.0\StringAddCalculatorKata.deps.json
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\bin\Debug\net6.0\StringAddCalculatorKata.runtimeconfig.json
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\bin\Debug\net6.0\StringAddCalculatorKata.dll
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\bin\Debug\net6.0\StringAddCalculatorKata.pdb
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\StringAddCalculatorKata.csproj.AssemblyReference.cache
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\StringAddCalculatorKata.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\StringAddCalculatorKata.AssemblyInfoInputs.cache
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\StringAddCalculatorKata.AssemblyInfo.cs
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\StringAddCalculatorKata.csproj.CoreCompileInputs.cache
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\StringAddCalculatorKata.dll
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\refint\StringAddCalculatorKata.dll
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\StringAddCalculatorKata.pdb
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\StringAddCalculatorKata.genruntimeconfig.cache
+C:\Users\najm_\Desktop\StringCalculatorKata\StringAddCalculatorKata\obj\Debug\net6.0\ref\StringAddCalculatorKata.dll
