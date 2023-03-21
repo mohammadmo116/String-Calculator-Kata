@@ -3,9 +3,9 @@ Console.WriteLine("Hello, World!");
 public class Test
 {
 
-    public string add(string Number)
+    public int add(string Number)
     {
-        return Number;
+        return Convert.ToInt32(Number);   
 
     }
 }

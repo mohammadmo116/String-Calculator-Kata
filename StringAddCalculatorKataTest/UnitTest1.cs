@@ -1,17 +1,18 @@
+using StringAddCalculatorKata;
+
 namespace StringAddCalculatorKataTest
 {
     public class UnitTest1
     {
         [Fact]
-        public void TestAddTwoNumbersInString()
+        public void AddNumbersInStringTest()
         {
             //Arrange
             string Number = "1";
-            string Expected = Number;
-            Test Calculator = new Test();
-
+            int Expected = 1;
+           
             //Act
-            string Actual = Calculator.add(Number);
+            int Actual = Number.AddNumbersInString();
 
             //Assert
             Assert.Equal(Actual, Expected);
