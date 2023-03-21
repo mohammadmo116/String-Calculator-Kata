@@ -2,7 +2,7 @@ using StringAddCalculatorKata;
 
 namespace StringAddCalculatorKataTest
 {
-    public class UnitTest1
+    public class StringAdditionTest
     {
         [Fact]
         public void AddNumbersInStringTest()
