@@ -20,7 +20,8 @@ namespace StringAddCalculatorKataTest
 
         [Theory]
         [InlineData("1",1)]
-        [InlineData("5", 5)]
+        [InlineData("", 0)]
+        [InlineData(" ", 0)]
         public void AddOneNumberInStringTest(string Input, int Expected)
         {
             //Act
@@ -33,7 +34,9 @@ namespace StringAddCalculatorKataTest
         [Theory]
         [InlineData("1,2", 3)]
         [InlineData("15,9,7", 31)]
-       
+        [InlineData("15,,9,,7", 31)]
+        [InlineData("15,9,,7", 31)]
+        [InlineData("15,9, ,7, ", 31)]
         public void AddMultipleNumbersInStringTest(string Input, int Expected)
         {
             //Act

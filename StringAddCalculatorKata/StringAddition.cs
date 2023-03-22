@@ -13,10 +13,12 @@ namespace StringAddCalculatorKata
             if(string.IsNullOrWhiteSpace(Number))
                 return 0;
 
+
             return Number.Split(",")
-                         .Aggregate(0,(total, value) =>
-                                      total + Convert.ToInt32(value));
-               
+                         .Aggregate(0, (total, value) =>
+                             string.IsNullOrWhiteSpace(value) ?
+                                total : total + Convert.ToInt32(value));
+
         }
     }
 
