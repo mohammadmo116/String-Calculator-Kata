@@ -1,32 +1,48 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace StringAddCalculatorKata
 {
-    public static class StringAddition
+    public class StringAddition
     {
-        public static int AddNumbersInString(this string Input)
+        private char _delimiter = ',';
+
+        public int AddNumbersInString(string Input)
         {
             if (string.IsNullOrWhiteSpace(Input))
                 return 0;
-            if (Input.HasNotValidSeparator())
+            if (Input.Length > 4)
+                CheckCustomDelimiter(ref Input);
+            if (HasInvalidSeparator(Input))
                 throw new ArgumentException("Not Valid Separator", nameof(Input));
             return SumOfNumbers(Input);
-
         }
 
-        private static bool HasNotValidSeparator(this string Input)
+        public string CheckCustomDelimiter(ref string Input)
         {
-            return Input.Contains(",\n") || Input.Contains("\n,");
+            Regex rx = new("//[\\s\\S]\\n");
+            if (rx.IsMatch(Input[..4]))
+            {
+                _delimiter = Input[2];
+                Input = Input[4..];
+            }
+            return Input;
         }
-        private static int SumOfNumbers(string Input)
+
+        public bool HasInvalidSeparator(string Input)
         {
-            return Input.Split(',', '\n')
+            return Input.Contains($"{_delimiter}\n") || Input.Contains($"\n{_delimiter}");
+        }
+
+        private int SumOfNumbers(string Input)
+        {
+            return Input.Split(_delimiter, '\n')
                          .Aggregate(0, (total, value) =>
                              string.IsNullOrWhiteSpace(value) ?
                                 total : total + Convert.ToInt32(value));
         }
 
     }
-
 }
+
 
