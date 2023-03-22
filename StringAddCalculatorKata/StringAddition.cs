@@ -8,14 +8,24 @@ namespace StringAddCalculatorKata
         {
             if (string.IsNullOrWhiteSpace(Input))
                 return 0;
-            if(Input.Contains(",\n")||Input.Contains("\n,"))
+            if (Input.HasNotValidSeparator())
                 throw new ArgumentException("Not Valid Separator", nameof(Input));
-            return Input.Split(',','\n')
+            return SumOfNumbers(Input);
+
+        }
+
+        private static bool HasNotValidSeparator(this string Input)
+        {
+            return Input.Contains(",\n") || Input.Contains("\n,");
+        }
+        private static int SumOfNumbers(string Input)
+        {
+            return Input.Split(',', '\n')
                          .Aggregate(0, (total, value) =>
                              string.IsNullOrWhiteSpace(value) ?
                                 total : total + Convert.ToInt32(value));
-
         }
+
     }
 
 }
