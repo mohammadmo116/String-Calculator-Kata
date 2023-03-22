@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StringAddCalculatorKata
+﻿namespace StringAddCalculatorKata
 {
     public static class StringAddition
     {
-        public static int AddNumbersInString(this string Input)
+        public static int AddNumbersInString(this string Number)
         {
-            if (string.IsNullOrWhiteSpace(Input))
+            if (string.IsNullOrWhiteSpace(Number))
                 return 0;
-            if(Input.Contains(",\n")|| Input.Contains("\n,"))
-                throw new ArgumentException("Not Valid Separator", nameof(Input));
-            return Input.Split(',','\n')
+
+            return Number.Split(",")
                          .Aggregate(0, (total, value) =>
                              string.IsNullOrWhiteSpace(value) ?
                                 total : total + Convert.ToInt32(value));
 
         }
     }
+
 }
+
