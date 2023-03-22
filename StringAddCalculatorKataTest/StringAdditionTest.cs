@@ -1,22 +1,47 @@
+using Newtonsoft.Json.Linq;
 using StringAddCalculatorKata;
 
 namespace StringAddCalculatorKataTest
 {
     public class StringAdditionTest
     {
-        [Fact]
-        public void AddNumbersInStringTest()
+
+        [Theory]
+        [InlineData(" ", 0)]
+        [InlineData("", 0)]
+        public void IfStringIsEmptyShouldReturnZeroTest(string Input, int Expected)
         {
-            //Arrange
-            string Number = "1";
-            int Expected = 1;
-           
-            //Act
-            int Actual = Number.AddNumbersInString();
+           //Act
+            int Actual = Input.AddNumbersInString();
 
             //Assert
-            Assert.Equal(Actual, Expected);
-
+            Assert.Equal(Expected, Actual);
         }
+
+        [Theory]
+        [InlineData("1",1)]
+        [InlineData("5", 5)]
+        public void AddOneNumberInStringTest(string Input, int Expected)
+        {
+            //Act
+            int Actual = Input.AddNumbersInString();
+
+            //Assert
+            Assert.Equal(Expected, Actual);
+        }
+
+        [Theory]
+        [InlineData("1,2", 3)]
+        [InlineData("15,9,7", 31)]
+       
+        public void AddMultipleNumbersInStringTest(string Input, int Expected)
+        {
+            //Act
+            int Actual = Input.AddNumbersInString();
+
+            //Assert
+            Assert.Equal(Expected, Actual);
+        }
+        
     }
 }

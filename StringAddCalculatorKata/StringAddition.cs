@@ -10,8 +10,13 @@ namespace StringAddCalculatorKata
     {
         public static int AddNumbersInString(this string Number)
         {
-            return Convert.ToInt32(Number);
+            if(string.IsNullOrWhiteSpace(Number))
+                return 0;
 
+            return Number.Split(",")
+                         .Aggregate(0,(total, value) =>
+                                      total + Convert.ToInt32(value));
+               
         }
     }
 
