@@ -5,17 +5,33 @@ namespace StringAddCalculatorKata
 {
     public class StringAddition
     {
-        private char _delimiter = ',';
+        private char _Delimiter;
+        private List<int> _NegativeNumbers;
+
+        public StringAddition() {
+            _Delimiter = ',';
+            _NegativeNumbers = new List<int>();
+
+        }
 
         public int AddNumbersInString(string Input)
         {
             if (string.IsNullOrWhiteSpace(Input))
                 return 0;
+
             if (Input.Length > 4)
                 CheckCustomDelimiter(ref Input);
-            if (HasInvalidSeparator(Input))
+
+            if (_Delimiter == '-')
+                throw new ArgumentException($"Negative Separator '-' is Not Allowed");
+
+            if (HasInvalidDelimiter(Input))
                 throw new ArgumentException("Not Valid Separator", nameof(Input));
-            return SumOfNumbers(Input);
+
+            int total = SumOfNumbers(Input);
+            if (_NegativeNumbers.Any())
+                throw new ArgumentException($"Negatives Are Not Allowed: {string.Join(',', _NegativeNumbers)}");
+            return total;
         }
 
         public string CheckCustomDelimiter(ref string Input)
@@ -23,23 +39,37 @@ namespace StringAddCalculatorKata
             Regex rx = new("//[\\s\\S]\\n");
             if (rx.IsMatch(Input[..4]))
             {
-                _delimiter = Input[2];
+                _Delimiter = Input[2];
                 Input = Input[4..];
             }
+
             return Input;
         }
+     
 
-        public bool HasInvalidSeparator(string Input)
+        public bool HasInvalidDelimiter(string Input)
         {
-            return Input.Contains($"{_delimiter}\n") || Input.Contains($"\n{_delimiter}");
+            return Input.Contains($"{_Delimiter}\n") || Input.Contains($"\n{_Delimiter}");
         }
 
         private int SumOfNumbers(string Input)
         {
-            return Input.Split(_delimiter, '\n')
-                         .Aggregate(0, (total, value) =>
-                             string.IsNullOrWhiteSpace(value) ?
-                                total : total + Convert.ToInt32(value));
+            return Input.Split(_Delimiter, '\n')
+                        .Aggregate(0, (total, value)=>{
+                            if (Input.Contains('-'))
+                            {
+                                if(value.Contains('-'))
+                                    _NegativeNumbers.Add(Convert.ToInt32(value));
+                            
+                                return total;
+                            }
+                            else
+                            {
+                                if (string.IsNullOrWhiteSpace(value))
+                                    return total;
+                                return total + Convert.ToInt32(value);
+                            }
+                        });
         }
 
     }

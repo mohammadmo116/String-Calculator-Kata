@@ -26,7 +26,7 @@ namespace StringAddCalculatorKataTest
         //step4
         [InlineData("//;\n1;2", 3)]
         [InlineData("//t\n1t12", 13)]
-        [InlineData("//?\n1?3?7", 11)]  
+        [InlineData("//?\n1?3?7", 11)]
         public void EmptyString_ReturnZeroTest(string Input, int Expected)
         {
             //Act
@@ -35,7 +35,7 @@ namespace StringAddCalculatorKataTest
             //Assert
             Assert.Equal(Expected, Actual);
         }
-        
+
         [Theory]
         //step3
         [InlineData("2\n12,\n1")]
@@ -51,7 +51,39 @@ namespace StringAddCalculatorKataTest
             //Assert
             Assert.Throws<ArgumentException>(nameof(Input), Act);
         }
-   
+        //step5
+        [Theory]
+        [InlineData("1,-2", new int[] { -2 })]
+        [InlineData("//;\n-1;2", new int[] {-1})]
+        [InlineData("//t\n-11t1t-2", new int[] {-11,-2})]
+        [InlineData("//?\n1?3?-7", new int[]{-7})]
+
+        public void HandleNegativeInputTest(string Input,int[] Expected)
+        {
+            //Act
+            void Act() => _obj.AddNumbersInString(Input);
+            //AssertActual
+            ArgumentException Actual = Assert.Throws<ArgumentException>(Act);
+            ArgumentException ExpectedException = new($"Negatives Are Not Allowed: {string.Join(',', Expected)}");
+
+            Assert.Equal(Actual.Message, ExpectedException.Message);
+
+        }
+
+
+        [Theory]
+        [InlineData("//-\n--11-1--2")]
+        public void HandleNegativeSeparatortTest(string Input)
+        {
+            //Act
+            void Act() => _obj.AddNumbersInString(Input);
+            //Assert
+            ArgumentException Exception = Assert.Throws<ArgumentException>(Act);
+            ArgumentException Actual = new($"Negative Separator '-' is Not Allowed");
+
+            Assert.Equal(Actual.Message, Exception.Message);
+
+        }
 
 
     }
