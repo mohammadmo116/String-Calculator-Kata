@@ -1,4 +1,3 @@
-using Newtonsoft.Json.Linq;
 using StringAddCalculatorKata;
 
 namespace StringAddCalculatorKataTest
@@ -11,7 +10,7 @@ namespace StringAddCalculatorKataTest
         [InlineData("", 0)]
         public void IfStringIsEmptyShouldReturnZeroTest(string Input, int Expected)
         {
-           //Act
+            //Act
             int Actual = Input.AddNumbersInString();
 
             //Assert
@@ -19,7 +18,7 @@ namespace StringAddCalculatorKataTest
         }
 
         [Theory]
-        [InlineData("1",1)]
+        [InlineData("1", 1)]
         [InlineData("", 0)]
         [InlineData(" ", 0)]
         public void AddOneNumberInStringTest(string Input, int Expected)
@@ -45,6 +44,6 @@ namespace StringAddCalculatorKataTest
             //Assert
             Assert.Equal(Expected, Actual);
         }
-        
+
     }
 }
