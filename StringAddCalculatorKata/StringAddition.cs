@@ -4,63 +4,77 @@ namespace StringAddCalculatorKata
 {
     public class StringAddition
     {
-        private char _Delimiter;
-        private List<int> _NegativeNumbers;
+        private char _delimiter;
+        private List<int> _negativeNumbers;
 
         public StringAddition()
         {
-            _Delimiter = ',';
-            _NegativeNumbers = new List<int>();
+            _delimiter = ',';
+            _negativeNumbers = new List<int>();
 
         }
 
-        public int AddNumbersInString(string Input)
+        public int GetSumNumbersFromString(string input)
         {
-            if (string.IsNullOrWhiteSpace(Input))
+            if (string.IsNullOrWhiteSpace(input))
+
+            {
                 return 0;
+            }
 
-            if (Input.Length > 4)
-                CheckCustomDelimiter(ref Input);
+            if (input.Length > 4)
+            {
+                ExtractDelimiter(ref input);
+            }
 
-            if (_Delimiter == '-')
-                throw new ArgumentException($"Negative Separator '-' is Not Allowed");
-
-            if (HasInvalidDelimiter(Input))
-                throw new ArgumentException("Not Valid Separator", nameof(Input));
-
-            int total = SumOfNumbers(Input);
-            if (_NegativeNumbers.Any())
-                throw new ArgumentException($"Negatives Are Not Allowed: {string.Join(',', _NegativeNumbers)}");
+            ValidateInput(input);
+ 
+            int total = SumOfNumbers(input);
+            if (_negativeNumbers.Any())
+            {
+                throw new ArgumentException($"Negatives Are Not Allowed: {string.Join(',', _negativeNumbers)}");
+            }
             return total;
         }
 
-        private void CheckCustomDelimiter(ref string Input)
+        private void ExtractDelimiter(ref string input)
         {
+            //;\n1;2;4
             Regex rx = new("//[\\s\\S]\\n");
-            if (rx.IsMatch(Input[..4]))
+            if (rx.IsMatch(input[..4]))
             {
-                _Delimiter = Input[2];
-                Input = Input[4..];
+                _delimiter = input[2];
+                input = input[4..];
             }
 
 
         }
-
-
-        private bool HasInvalidDelimiter(string Input)
+        private void ValidateInput(string input)
         {
-            return Input.Contains($"{_Delimiter}\n") || Input.Contains($"\n{_Delimiter}");
+            ValidateDelimiter();
+            if (input.Contains($"{_delimiter}\n") || input.Contains($"\n{_delimiter}"))
+            {
+                throw new ArgumentException("Not Valid Separator", nameof(input));
+            }
         }
 
-        private int SumOfNumbers(string Input)
+        private void ValidateDelimiter()
         {
-            return Input.Split(_Delimiter, '\n')
+            if (_delimiter == '-')
+            {
+                throw new ArgumentException($"Negative Separator '-' is Not Allowed");
+            }
+        }
+
+        private int SumOfNumbers(string input)
+        {
+            return input.Split(_delimiter, '\n')
                         .Aggregate(0, (total, value) =>
                         {
-                            if (Input.Contains('-'))
+                            if (input.Contains('-'))
                             {
                                 if (value.Contains('-'))
-                                    _NegativeNumbers.Add(Convert.ToInt32(value));
+                                    _negativeNumbers.Add(Convert.ToInt32(value));
                                 return total;
                             }
                             else

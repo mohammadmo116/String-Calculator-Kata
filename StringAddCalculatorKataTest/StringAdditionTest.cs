@@ -30,10 +30,10 @@ namespace StringAddCalculatorKataTest
         [InlineData("15,9,,10001", 24)]
         [InlineData("//t\n1t1000", 1001)]
         [InlineData("//?\n1005?3?7", 10)]
-        public void AddNumbersInString(string Input, int Expected)
+        public void AddNumbersInString(string input, int Expected)
         {
             //Act
-            int Actual = _obj.AddNumbersInString(Input);
+            int Actual = _obj.GetSumNumbersFromString(input);
 
             //Assert
             Assert.Equal(Expected, Actual);
@@ -48,13 +48,13 @@ namespace StringAddCalculatorKataTest
         //step4
         [InlineData("//?\n1?3?\n7")]
         [InlineData("//?\n1?3\n?7")]
-        public void NotValidInputThrowException(string Input)
+        public void NotValidInputThrowException(string input)
         {
             //Act
-            void Act() => _obj.AddNumbersInString(Input);
+            void Act() => _obj.GetSumNumbersFromString(input);
 
             //Assert
-            Assert.Throws<ArgumentException>(nameof(Input), Act);
+            Assert.Throws<ArgumentException>(nameof(input), Act);
         }
 
 
@@ -66,10 +66,10 @@ namespace StringAddCalculatorKataTest
         [InlineData("//t\n-11t1t-2", new int[] { -11, -2 })]
         [InlineData("//?\n1?3?-7", new int[] { -7 })]
 
-        public void NegativeInputThrowException(string Input, int[] Expected)
+        public void NegativeInputThrowException(string input, int[] Expected)
         {
             //Act
-            void Act() => _obj.AddNumbersInString(Input);
+            void Act() => _obj.GetSumNumbersFromString(input);
             //AssertActual
             ArgumentException Actual = Assert.Throws<ArgumentException>(Act);
             ArgumentException ExpectedException = new($"Negatives Are Not Allowed: {string.Join(',', Expected)}");
@@ -83,10 +83,10 @@ namespace StringAddCalculatorKataTest
 
         [Theory]
         [InlineData("//-\n--11-1--2")]
-        public void NegativeSeparatortThrowException(string Input)
+        public void NegativeSeparatortThrowException(string input)
         {
             //Act
-            void Act() => _obj.AddNumbersInString(Input);
+            void Act() => _obj.GetSumNumbersFromString(input);
             //Assert
             ArgumentException Exception = Assert.Throws<ArgumentException>(Act);
             ArgumentException Actual = new($"Negative Separator '-' is Not Allowed");
