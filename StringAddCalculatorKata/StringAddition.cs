@@ -28,7 +28,7 @@ namespace StringAddCalculatorKata
             }
 
             ValidateInput(input);
- 
+
             int total = SumOfNumbers(input);
             if (_negativeNumbers.Any())
             {
@@ -39,7 +39,6 @@ namespace StringAddCalculatorKata
 
         private void ExtractDelimiter(ref string input)
         {
-            //;\n1;2;4
             Regex rx = new("//[\\s\\S]\\n");
             if (rx.IsMatch(input[..4]))
             {
