@@ -34,7 +34,7 @@ namespace StringAddCalculatorKata
             return total;
         }
 
-        public string CheckCustomDelimiter(ref string Input)
+        private void CheckCustomDelimiter(ref string Input)
         {
             Regex rx = new("//[\\s\\S]\\n");
             if (rx.IsMatch(Input[..4]))
@@ -43,11 +43,11 @@ namespace StringAddCalculatorKata
                 Input = Input[4..];
             }
 
-            return Input;
+
         }
 
 
-        public bool HasInvalidDelimiter(string Input)
+        private bool HasInvalidDelimiter(string Input)
         {
             return Input.Contains($"{_Delimiter}\n") || Input.Contains($"\n{_Delimiter}");
         }
