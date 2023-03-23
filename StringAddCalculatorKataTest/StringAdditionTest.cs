@@ -1,5 +1,4 @@
 using StringAddCalculatorKata;
-using Xunit.Sdk;
 
 namespace StringAddCalculatorKataTest
 {
@@ -27,7 +26,11 @@ namespace StringAddCalculatorKataTest
         [InlineData("//;\n1;2", 3)]
         [InlineData("//t\n1t12", 13)]
         [InlineData("//?\n1?3?7", 11)]
-        public void EmptyString_ReturnZeroTest(string Input, int Expected)
+        //step6
+        [InlineData("15,9,,10001", 24)]
+        [InlineData("//t\n1t1000", 1001)]
+        [InlineData("//?\n1005?3?7", 10)]
+        public void AddNumbersInString(string Input, int Expected)
         {
             //Act
             int Actual = _obj.AddNumbersInString(Input);
@@ -36,6 +39,8 @@ namespace StringAddCalculatorKataTest
             Assert.Equal(Expected, Actual);
         }
 
+
+
         [Theory]
         //step3
         [InlineData("2\n12,\n1")]
@@ -43,7 +48,7 @@ namespace StringAddCalculatorKataTest
         //step4
         [InlineData("//?\n1?3?\n7")]
         [InlineData("//?\n1?3\n?7")]
-        public void HandleNotValidInputTest(string Input)
+        public void NotValidInputThrowException(string Input)
         {
             //Act
             void Act() => _obj.AddNumbersInString(Input);
@@ -51,14 +56,17 @@ namespace StringAddCalculatorKataTest
             //Assert
             Assert.Throws<ArgumentException>(nameof(Input), Act);
         }
+
+
+
         //step5
         [Theory]
         [InlineData("1,-2", new int[] { -2 })]
-        [InlineData("//;\n-1;2", new int[] {-1})]
-        [InlineData("//t\n-11t1t-2", new int[] {-11,-2})]
-        [InlineData("//?\n1?3?-7", new int[]{-7})]
+        [InlineData("//;\n-1;2", new int[] { -1 })]
+        [InlineData("//t\n-11t1t-2", new int[] { -11, -2 })]
+        [InlineData("//?\n1?3?-7", new int[] { -7 })]
 
-        public void HandleNegativeInputTest(string Input,int[] Expected)
+        public void NegativeInputThrowException(string Input, int[] Expected)
         {
             //Act
             void Act() => _obj.AddNumbersInString(Input);
@@ -71,9 +79,11 @@ namespace StringAddCalculatorKataTest
         }
 
 
+
+
         [Theory]
         [InlineData("//-\n--11-1--2")]
-        public void HandleNegativeSeparatortTest(string Input)
+        public void NegativeSeparatortThrowException(string Input)
         {
             //Act
             void Act() => _obj.AddNumbersInString(Input);

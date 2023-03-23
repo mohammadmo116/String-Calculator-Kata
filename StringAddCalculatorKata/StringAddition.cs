@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace StringAddCalculatorKata
 {
@@ -8,7 +7,8 @@ namespace StringAddCalculatorKata
         private char _Delimiter;
         private List<int> _NegativeNumbers;
 
-        public StringAddition() {
+        public StringAddition()
+        {
             _Delimiter = ',';
             _NegativeNumbers = new List<int>();
 
@@ -45,7 +45,7 @@ namespace StringAddCalculatorKata
 
             return Input;
         }
-     
+
 
         public bool HasInvalidDelimiter(string Input)
         {
@@ -55,17 +55,17 @@ namespace StringAddCalculatorKata
         private int SumOfNumbers(string Input)
         {
             return Input.Split(_Delimiter, '\n')
-                        .Aggregate(0, (total, value)=>{
+                        .Aggregate(0, (total, value) =>
+                        {
                             if (Input.Contains('-'))
                             {
-                                if(value.Contains('-'))
+                                if (value.Contains('-'))
                                     _NegativeNumbers.Add(Convert.ToInt32(value));
-                            
                                 return total;
                             }
                             else
                             {
-                                if (string.IsNullOrWhiteSpace(value))
+                                if (string.IsNullOrWhiteSpace(value) || Convert.ToInt32(value) > 1000)
                                     return total;
                                 return total + Convert.ToInt32(value);
                             }
